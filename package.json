@@ -1,0 +1,56 @@
+{
+  "name": "docker-typescript-base",
+  "version": "0.0.1",
+  "authors": "Corey Cosman",
+  "repository": "https://github.com/coreycosman/docker-typescript-base.git",
+  "description": "run typescript code in docker containers in prod, dev, test, and debug environments",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "src/cli.js",
+    "debug": "nodemon -w src/cli.ts -e .ts -x node --inspect=0.0.0.0:4242 -r ts-node/register src/cli.ts"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "cli-spinners": "^2.3.0",
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^5.0.0",
+    "figlet": "^1.3.0",
+    "ora": "^4.0.4",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^10.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.5",
+    "jest": "^25.2.7",
+    "lint-staged": "^10.1.3",
+    "prettier": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.1.3"
+  },
+  "engines": {
+    "node": "12.16.1"
+  },
+  "engineStrict": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,js}": [
+      "prettier --write",
+      "./node_modules/.bin/tsc --noEmit",
+      "eslint"
+    ]
+  },
+  "bin": {
+    "docker-ts-build": "./cli/cli.ts"
+  }
+}
